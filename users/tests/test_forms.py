@@ -18,7 +18,7 @@ class CreateUserFormTest(TestCase):
         form = CreateUserForm(data=request)
         self.assertTrue(form.is_valid())
 
-        form = CreateUserForm(data={'username': 'testuser1',
+        form = CreateUserForm(data={'email': 'testuser1@test.fr',
                                     'password1': 'sdfuhosd',
                                     'password2': 'sdfuhosd'})
         self.assertTrue(form.is_valid())
@@ -31,7 +31,7 @@ class CreateUserFormTest(TestCase):
                                     'email': 'testuser1@test.fr'})
         self.assertFalse(form.is_valid())
 
-        form = CreateUserForm(data={'email': 'testuser1@test.fr',
+        form = CreateUserForm(data={'username': 'testuser1',
                                     'password1': 'sdfuhosd',
                                     'password2': 'sdfuhosd'})
         self.assertFalse(form.is_valid())
