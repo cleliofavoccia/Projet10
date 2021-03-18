@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}Se connecter{% endblock title %}
+
+<!-- Content-->
+{% block content %}
+<!-- Masthead-->
+
+{% if form.errors %}
+    <p>Votre pseudonyme et votre mot de passe ne correspondent pas. Veuillez réessayer.</p>
+{% endif %}
+
+{% if next %}
+    {% if user.is_authenticated %}
+      <p>Votre compte n'a pas accès à cette page. Connectez vous avec un compte qui
+      y a accès</p>
+    {% else %}
+      <p>Veuillez vous connecter pour voir cette page.</p>
+    {% endif %}
+{% endif %}
+
+<header class="masthead-s">
+    <div class="container">
+        <div class="row h-100 align-items-center justify-content-center text-center">
+            <div class="col-lg-11 align-self-end">
+                <h1 class="text-uppercase text-white font-weight-bold">Hello</h1>
+                <hr class="divider my-4" />
+            </div>
+            <div class="col-lg-8 align-self-baseline">
+                <h2 class="text-white-75 font-weight-light mb-5">Prêt à joindre la tribu ?</h2>
+            </div>
+        </div>
+    </div>
+</header>
+<div class="container">
+  <div class="row" style="margin-left:22%;">
+      <form class="auth_form" method="post" action="{% url 'login' %}">
+        {% csrf_token %}
+        <div class="form-group">
+        <label>Adresse e-mail</label>
+        {{ form.username }}
+        </div>
+        <div class="form-group">
+        <label>Mot de passe</label>
+        {{ form.password }}
+        </div>
+        <input id="button-submit" type="submit" class="btn btn-default btn-lg" value="Se connecter" />
+        <input type="hidden" name="next" value="{{ next }}" />
+        <h3><a id="button-sign_in" class="btn btn-default btn-lg" href="{% url 'users:sign_in' %}">Toujours pas inscrit ?</a></h3>
+  </form>
+  </div>
+</div>
+{% endblock content %}
