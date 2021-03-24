@@ -4,6 +4,10 @@ python:
 # command to install dependencies
 install:
   - pip install -r requirements.txt
+
+# database to use
+env: DJANGO_SETTINGS_MODULE=disquaire_project.settings.travis
+
 # command to run tests
 script:
   - python manage.py test
