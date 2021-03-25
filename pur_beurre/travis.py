@@ -15,7 +15,7 @@ DATABASES = {
         'NAME': 'purbeurredb',
         'USER': 'postgres',
         'PASSWORD': '',
-        'HOST': '',
+        'HOST': '/tmp/',
         'PORT': '5432',
     }
 }
