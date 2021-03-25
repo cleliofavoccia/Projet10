@@ -11,11 +11,11 @@ ALLOWED_HOSTS = []
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'purbeurredb',
         'USER': 'postgres',
         'PASSWORD': '',
-        'HOST': '/tmp/',
+        'HOST': '',
         'PORT': '',
     }
 }
