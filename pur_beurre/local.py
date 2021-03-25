@@ -1,3 +1,5 @@
+"""Django settings for Projet8 project in local."""
+
 from .base import *
 
 # SECURITY WARNING: don't run with debug turned on in production!
