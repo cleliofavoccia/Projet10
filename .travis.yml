@@ -8,6 +8,7 @@ install:
 # database to use
 env: DJANGO_SETTINGS_MODULE=pur_beurre.travis
 
+os: windows
 # command to run tests
 script:
   - python manage.py test
