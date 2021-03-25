@@ -2,6 +2,8 @@
 
 from .base import *
 
+SECRET_KEY = os.getenv('SECRET_KEY', 'a-very-secret-key')
+
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
