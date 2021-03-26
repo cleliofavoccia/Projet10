@@ -45,7 +45,7 @@ class ChromeFunctionalTestCases(StaticLiveServerTestCase):
         """Create an user"""
         User = get_user_model()
         User.objects.create_user(
-            username="testuser", password="PdfjqX458s"
+            username="testuser", email='testuser@testuser.com', password="PdfjqX458s"
         )
 
     def test_user_can_connect_and_disconnect(self):
@@ -55,7 +55,7 @@ class ChromeFunctionalTestCases(StaticLiveServerTestCase):
         # Connect
         self.driver.find_element_by_css_selector('#button-login').click()
         self.driver.find_element_by_css_selector('#id_username').send_keys(
-            "testuser"
+            "testuser@testuser.com"
         )
         self.driver.find_element_by_css_selector('#id_password').send_keys(
             "PdfjqX458s"
@@ -73,9 +73,6 @@ class ChromeFunctionalTestCases(StaticLiveServerTestCase):
         # Sign in
         self.driver.find_element_by_css_selector('#button-login').click()
         self.driver.find_element_by_css_selector('#button-sign_in').click()
-        self.driver.find_element_by_css_selector('#id_username').send_keys(
-            "testuser2"
-        )
         self.driver.find_element_by_css_selector('#id_email').send_keys(
             "testuser2@test.com"
         )
@@ -89,7 +86,7 @@ class ChromeFunctionalTestCases(StaticLiveServerTestCase):
         # Connect
         self.driver.find_element_by_css_selector('#button-login').click()
         self.driver.find_element_by_css_selector('#id_username').send_keys(
-            "testuser2"
+            "testuser2@test.com"
         )
         self.driver.find_element_by_css_selector('#id_password').send_keys(
             "eofh5jf8"
@@ -105,17 +102,13 @@ class ChromeFunctionalTestCases(StaticLiveServerTestCase):
         # Connect
         self.driver.find_element_by_css_selector('#button-login').click()
         self.driver.find_element_by_css_selector('#id_username').send_keys(
-            "testuser"
+            "testuser@testuser.com"
         )
         self.driver.find_element_by_css_selector('#id_password').send_keys(
             "PdfjqX458s"
         )
         self.driver.find_element_by_css_selector('#button-submit').click()
         self.driver.find_element_by_css_selector('#button-account').click()
-        # Proof is in account
-        self.driver.find_element_by_css_selector('#modify-email').send_keys(
-            "testuser@live.fr"
-        )
 
     def test_user_can_type_a_request_in_substitute_forms(self):
         """Test if user with a Chrome session can make a request
@@ -132,7 +125,7 @@ class ChromeFunctionalTestCases(StaticLiveServerTestCase):
         # Connect
         self.driver.find_element_by_css_selector('#button-login').click()
         self.driver.find_element_by_css_selector('#id_username').send_keys(
-            "testuser"
+            "testuser@testuser.com"
         )
         self.driver.find_element_by_css_selector('#id_password').send_keys(
             "PdfjqX458s"
@@ -164,7 +157,7 @@ class ChromeFunctionalTestCases(StaticLiveServerTestCase):
         # Connect
         self.driver.find_element_by_css_selector('#button-login').click()
         self.driver.find_element_by_css_selector('#id_username').send_keys(
-            "testuser"
+            "testuser@testuser.com"
         )
         self.driver.find_element_by_css_selector('#id_password').send_keys(
             "PdfjqX458s"
