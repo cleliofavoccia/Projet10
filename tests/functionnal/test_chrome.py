@@ -29,7 +29,7 @@ class ChromeFunctionalTestCases(StaticLiveServerTestCase):
         )
         # Wait wait for a certain amount of time
         # before it throws a "No Such Element Exception"
-        cls.driver.implicitly_wait(30)
+        cls.driver.implicitly_wait(50)
         # Reduces the chances of Selenium scripts
         # missing out on web elements they must interact
         # with during automated tests
