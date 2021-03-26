@@ -1,6 +1,6 @@
 """Django settings for Projet8 project in Travis."""
 
-from .base import *
+from pur_beurre.settings.base import *
 
 SECRET_KEY = os.getenv('SECRET_KEY', 'a-very-secret-key')
 
@@ -12,7 +12,7 @@ ALLOWED_HOSTS = []
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'purbeurredb',
+        'NAME': '',
         'USER': 'postgres',
         'PASSWORD': '',
         'HOST': '',
