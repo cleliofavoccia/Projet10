@@ -11,6 +11,9 @@ chrome_options = webdriver.ChromeOptions()
 chrome_options.add_argument('--headless')
 # Navigate in a certain window
 chrome_options.add_argument('window-size=1920x1080')
+chrome_options.add_argument("start-maximized")
+chrome_options.add_argument("disable-infobars")
+chrome_options.add_argument("--disable-extensions")
 
 
 class ChromeFunctionalTestCases(StaticLiveServerTestCase):
