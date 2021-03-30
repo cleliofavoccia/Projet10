@@ -27,7 +27,7 @@ class ChromeFunctionalTestCases(StaticLiveServerTestCase):
         super().setUpClass()
         cls.driver = webdriver.Chrome(
             executable_path=str(
-                travis / 'webdrivers' / 'chromedriver'
+                travis.BASE_DIR / 'webdrivers' / 'chromedriver'
             ),
             options=chrome_options,
         )
