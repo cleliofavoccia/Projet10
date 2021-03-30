@@ -2,6 +2,7 @@
 from django.contrib.staticfiles.testing import StaticLiveServerTestCase
 from django.contrib.auth import get_user_model
 from django.conf import settings
+from pur_beurre.settings import travis
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 
@@ -26,7 +27,7 @@ class ChromeFunctionalTestCases(StaticLiveServerTestCase):
         super().setUpClass()
         cls.driver = webdriver.Chrome(
             executable_path=str(
-                settings.BASE_DIR / 'webdrivers' / 'chromedriver'
+                travis / 'webdrivers' / 'chromedriver'
             ),
             options=chrome_options,
         )
