@@ -2,7 +2,6 @@
 from django.contrib.staticfiles.testing import StaticLiveServerTestCase
 from django.contrib.auth import get_user_model
 from django.conf import settings
-from pur_beurre.settings import travis
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 
@@ -20,30 +19,17 @@ chrome_options.add_argument("--disable-extensions")
 class ChromeFunctionalTestCases(StaticLiveServerTestCase):
     """Functional tests using the Chrome web browser in headless mode."""
 
-    @classmethod
-    def setUpClass(cls):
-        """Create a Chrome session
-        and define his behavior"""
-        super().setUpClass()
-        cls.driver = webdriver.Chrome(
-            executable_path=str(
-                travis.BASE_DIR / 'webdrivers' / 'chromedriver'
-            ),
-            options=chrome_options,
-        )
-        # Wait wait for a certain amount of time
-        # before it throws a "No Such Element Exception"
-        cls.driver.implicitly_wait(50)
-        # Reduces the chances of Selenium scripts
-        # missing out on web elements they must interact
-        # with during automated tests
-        cls.driver.maximize_window()
-
-    @classmethod
-    def tearDownClass(cls):
-        """Close a Chrome session"""
-        super().tearDownClass()
-        cls.driver.quit()
+    # @classmethod
+    # def setUpClass(cls):
+    #     """Create a Chrome session
+    #     and define his behavior"""
+    #     super().setUpClass()
+    #
+    # @classmethod
+    # def tearDownClass(cls):
+    #     """Close a Chrome session"""
+    #     super().tearDownClass()
+    #     cls.driver.quit()
 
     def setUp(self):
         """Create an user"""
@@ -51,6 +37,22 @@ class ChromeFunctionalTestCases(StaticLiveServerTestCase):
         User.objects.create_user(
             username="testuser", email='testuser@testuser.com', password="PdfjqX458s"
         )
+        self.driver = webdriver.Chrome(
+            executable_path=str(
+                settings.BASE_DIR / 'webdrivers' / 'chromedriver'
+            ),
+            options=chrome_options,
+        )
+        # Wait wait for a certain amount of time
+        # before it throws a "No Such Element Exception"
+        self.driver.implicitly_wait(50)
+        # Reduces the chances of Selenium scripts
+        # missing out on web elements they must interact
+        # with during automated tests
+        self.driver.maximize_window()
+
+    def tearDown(self):
+        self.driver.quit()
 
     def test_user_can_connect_and_disconnect(self):
         """Test if user with a Chrome session can connect and
