@@ -28,7 +28,7 @@ cronitor.api_key = '7632b9d120e143969c99bb15f76968da'
 # monitor any function
 @cronitor.job('QWpptg')
 def update_database(args):
-    call_command('fill_database')
+    call_command('update_database')
 
 # Or embed telemetry events in your application
 monitor = cronitor.Monitor('QWpptg')
