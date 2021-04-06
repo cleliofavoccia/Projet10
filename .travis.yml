@@ -5,7 +5,7 @@ python:
   - "3.8"
 
 addons:
-  chrome: stable
+  firefox: latest
 
 # command to install dependencies
 install:
