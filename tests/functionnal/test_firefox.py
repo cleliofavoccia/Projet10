@@ -6,30 +6,38 @@ from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 
 # Call chrome options class
-chrome_options = webdriver.ChromeOptions()
+firefox_options = webdriver.FirefoxOptions()
 # Headless mode
-chrome_options.add_argument('--headless')
-# Navigate in a certain window
-chrome_options.add_argument('window-size=1920x1080')
-chrome_options.add_argument("start-maximized")
-chrome_options.add_argument("disable-infobars")
-chrome_options.add_argument("--disable-extensions")
+firefox_options.headless = True
 
 
-class ChromeFunctionalTestCases(StaticLiveServerTestCase):
-    """Functional tests using the Chrome web browser in headless mode."""
+class FirefoxFunctionalTestCases(StaticLiveServerTestCase):
+    """Functional tests using the Firefox web browser in headless mode."""
 
-    # @classmethod
-    # def setUpClass(cls):
-    #     """Create a Chrome session
-    #     and define his behavior"""
-    #     super().setUpClass()
-    #
-    # @classmethod
-    # def tearDownClass(cls):
-    #     """Close a Chrome session"""
-    #     super().tearDownClass()
-    #     cls.driver.quit()
+    @classmethod
+    def setUpClass(cls):
+        """Create a Chrome session
+        and define his behavior"""
+        super().setUpClass()
+        cls.driver = webdriver.Firefox(
+            executable_path=str(
+                settings.BASE_DIR / 'webdrivers' / 'geckodriver'
+            ),
+            options=firefox_options,
+        )
+        # Wait wait for a certain amount of time
+        # before it throws a "No Such Element Exception"
+        cls.driver.implicitly_wait(30)
+        # Reduces the chances of Selenium scripts
+        # missing out on web elements they must interact
+        # with during automated tests
+        cls.driver.maximize_window()
+
+    @classmethod
+    def tearDownClass(cls):
+        """Close a Chrome session"""
+        super().tearDownClass()
+        cls.driver.quit()
 
     def setUp(self):
         """Create an user"""
@@ -37,19 +45,6 @@ class ChromeFunctionalTestCases(StaticLiveServerTestCase):
         User.objects.create_user(
             username="testuser", email='testuser@testuser.com', password="PdfjqX458s"
         )
-        self.driver = webdriver.Chrome(
-            executable_path=str(
-                settings.BASE_DIR / 'webdrivers' / 'chromedriver'
-            ),
-            options=chrome_options,
-        )
-        # Wait wait for a certain amount of time
-        # before it throws a "No Such Element Exception"
-        self.driver.implicitly_wait(50)
-        # Reduces the chances of Selenium scripts
-        # missing out on web elements they must interact
-        # with during automated tests
-        self.driver.maximize_window()
 
     def tearDown(self):
         self.driver.quit()
