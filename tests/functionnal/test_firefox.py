@@ -4,6 +4,7 @@ from django.contrib.auth import get_user_model
 from django.conf import settings
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
+from selenium.common.exceptions import StaleElementReferenceException
 
 # Call firefox options class
 firefox_options = webdriver.FirefoxOptions()
@@ -137,7 +138,7 @@ class FirefoxFunctionalTestCases(StaticLiveServerTestCase):
         )
         (self.driver.find_element_by_css_selector('#id_research')
          .send_keys(Keys.ENTER))
-        self.driver.find_element_by_tag_name('input').click()  # Error
+        self.driver.find_element_by_tag_name('input').click()
 
     def test_user_can_consult_product_detail(self):
         """Test if user with a Firefox session can consult
@@ -146,9 +147,13 @@ class FirefoxFunctionalTestCases(StaticLiveServerTestCase):
         self.driver.find_element_by_css_selector('#id_research').send_keys(
             "nutella"
         )
-        (self.driver.find_element_by_css_selector('#id_research')
-         .send_keys(Keys.ENTER))
-        self.driver.find_element_by_tag_name('a').click()  # Error
+        self.driver.find_element_by_css_selector('#id_research').send_keys(
+            Keys.ENTER
+        )
+        try:
+            self.driver.find_element_by_tag_name('a').click()
+        except StaleElementReferenceException:
+            self.driver.find_element_by_tag_name('a').click()
 
     def test_user_can_access_to_his_favorites_page(self):
         """Test if user with a Firefox session can access
