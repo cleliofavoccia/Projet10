@@ -138,7 +138,10 @@ class FirefoxFunctionalTestCases(StaticLiveServerTestCase):
         )
         (self.driver.find_element_by_css_selector('#id_research')
          .send_keys(Keys.ENTER))
-        self.driver.find_element_by_tag_name('input').click()
+        try:
+            self.driver.find_element_by_tag_name('input').click()
+        except StaleElementReferenceException:
+            self.driver.find_element_by_tag_name('input').click()
 
     def test_user_can_consult_product_detail(self):
         """Test if user with a Firefox session can consult
