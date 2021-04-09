@@ -25,11 +25,6 @@ class Command(BaseCommand):
 
         products_list = cleaner_request.clean(products_list)
 
-        # Categories in database to update
-        categories_to_update_list = Category.objects.all()
-
-# rechercher sur url
-
         # Update products in database with new datas
         for product in products_list:
             # Product in products_to_update_list choose by index
@@ -37,23 +32,22 @@ class Command(BaseCommand):
                 product_to_update = Product.objects.get(url=product['url'])
 
                 # Update product with new datas
-                product_to_update.name = product['name']
-                product_to_update.description = product['description']
-                product_to_update.nutriscore = product['nutriscore']
-                product_to_update.url = product['url']
-                product_to_update.image_url = product['image_url']
-                product_to_update.nutrition_image_url = product['image_nutrition_url']
+                product_to_update.name = product.get('product', product_to_update.name)
+                product_to_update.description = product.get('description', product_to_update.description)
+                product_to_update.nutriscore = product.get('nutriscore', product_to_update.nutriscore)
+                product_to_update.url = product.get('url', product_to_update.url)
+                product_to_update.image_url = product.get('image_url', product_to_update.image_url)
+                product_to_update.nutrition_image_url = product.get('image_nutrition_url',
+                                                                    product_to_update.image_nutrition_url)
 
+                product_to_update.categories.clear()
+                for category in product['categories']:
+                    category, created = Category.objects.get_or_create(name=category)
+                    product_to_update.categories.add(category)
+
+                product_to_update.save()
             except Product.DoesNotExist:
-                pass
-
-            # Update categories in database with new datas
-            for category in product['categories']:
-                # Category in categories_to_update_list choose by index
-                category_to_update = Category.objects.get(name=category)
-
-                # Update category with new datas
-                category_to_update.name = category
+                continue
 
             self.stdout.write(
                 self.style.SUCCESS(
