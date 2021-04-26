@@ -44,7 +44,7 @@ monitor.ping(state='fail')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ["46.101.26.182"]
+ALLOWED_HOSTS = ["178.62.109.10"]
 
 DATABASES = {
     'default': {
