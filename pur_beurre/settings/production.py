@@ -52,7 +52,7 @@ DATABASES = {
         'NAME': 'pur_beurre',
         'USER': 'clelio',
         'PASSWORD': os.getenv('DB_PASSWORD_PROD'),
-        'HOST': '127.0.0.1',
+        'HOST': '178.62.109.10',
         'PORT': '5432',
     }
 }
