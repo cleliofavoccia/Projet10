@@ -8,7 +8,7 @@ from django.core.management import call_command
 
 # Sentry
 sentry_sdk.init(
-    dsn="https://6929f6ed13b141fda268e2aa1629f9eb@o561438.ingest.sentry.io/5698543",
+    dsn=os.getenv('SENTRY_DSN'),
     integrations=[DjangoIntegration()],
 
     # Set traces_sample_rate to 1.0 to capture 100%
@@ -23,7 +23,7 @@ sentry_sdk.init(
 
 # Cronitor
 
-cronitor.api_key = '7632b9d120e143969c99bb15f76968da'
+cronitor.api_key = os.getenv('CRONITOR_KEY')
 
 
 # monitor any function
