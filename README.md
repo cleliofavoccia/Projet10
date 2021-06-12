@@ -1,3 +1,5 @@
+Adresse du site déployé : http://178.62.109.10/
+
 # Consignes
 
 ## Simuler un serveur de production en local
